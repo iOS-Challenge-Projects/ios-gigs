@@ -20,7 +20,7 @@ class GigsTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         if (gigController.bearer == nil){
-            performSegue(withIdentifier: "", sender: self)
+            performSegue(withIdentifier: "loginSegue", sender: self)
         }
         // TODO: fetch gigs here
         

@@ -67,8 +67,21 @@ class LoginViewController: UIViewController {
                 if let error = error{
                    print("Error during Sign Up: \(error)")
                 }else{
-                    //create alert
-                    
+                    //create alert in main queue because this is related to UI
+                    DispatchQueue.main.async {
+                        
+                        //1.create the alert
+                        let alertController = UIAlertController(title: "Sign Up Successful", message: "Now please Sign In", preferredStyle: .alert)
+                        
+                        //2.Create Action
+                        let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                        
+                        //3.add the action to the controller
+                        alertController.addAction(alertAction)
+                        
+                        //4.Present the aler
+                        self.present(alertController, animated: true)
+                    }
                     
                 }
                 
