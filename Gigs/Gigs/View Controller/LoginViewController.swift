@@ -6,9 +6,21 @@
 //  Copyright © 2020 FGT MAC. All rights reserved.
 //
 
+enum LoginType: String{
+    case signUp
+    case signIn
+}
+
 import UIKit
 
 class LoginViewController: UIViewController {
+    
+    
+    //Will be use to recieve the gigController using prepare for segue
+    var gigController: GigController?
+    
+    //using enum to difine current state which defaults to signUp
+    var loginType = LoginType.signUp
 
     //MARK: - Outlets
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -26,10 +38,52 @@ class LoginViewController: UIViewController {
     
     //MARK: - Actions
     @IBAction func actionSegmentedButton(_ sender: UISegmentedControl) {
-        
+        //set properties base on user selection
+        if sender.selectedSegmentIndex == 0 {//Sign up
+            loginType = LoginType.signUp
+            actionButton.titleLabel?.text = "Sign Up"
+            
+        }else{//Login
+            loginType = LoginType.signIn
+            actionButton.titleLabel?.text = "Sign In"
+        }
     }
     
     @IBAction func actionButtonPressed(_ sender: UIButton) {
+        
+        //Unwrap gigController
+        guard let gigController = gigController else { return }
+        
+        //Unwrap text fields and check if they are empty
+        guard let username = userNameTextField.text ,!username.isEmpty, let password = passwordTextField.text, !password.isEmpty else {return}
+            
+        //creating user
+        let user = User(username: username, password: password)
+        
+        //Sign Up
+        if loginType == LoginType.signUp{
+            gigController.signUp(for: user) { (error) in
+                //Handle error
+                if let error = error{
+                   print("Error during Sign Up: \(error)")
+                }else{
+                    //create alert
+                    
+                    
+                }
+                
+            }
+            
+         //Sign In
+            }else{
+            gigController.signIn(for: user) { (error) in
+                //Handle error
+                
+                //create alert
+            }
+            
+            }
+        
         
     }
     

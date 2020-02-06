@@ -10,9 +10,20 @@ import UIKit
 
 class GigsTableViewController: UITableViewController {
 
+    //this instance of GigController will be use for dependency injection to the rest of the views
+    let gigController = GigController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if (gigController.bearer == nil){
+            performSegue(withIdentifier: "", sender: self)
+        }
+        // TODO: fetch gigs here
+        
     }
 
     // MARK: - Table view data source
@@ -25,6 +36,12 @@ class GigsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 0
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
+        
+        return cell
     }
 
     /*
