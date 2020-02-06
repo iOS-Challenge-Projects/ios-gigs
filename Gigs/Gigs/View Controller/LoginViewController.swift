@@ -41,11 +41,11 @@ class LoginViewController: UIViewController {
         //set properties base on user selection
         if sender.selectedSegmentIndex == 0 {//Sign up
             loginType = LoginType.signUp
-            actionButton.titleLabel?.text = "Sign Up"
+            actionButton.setTitle("Sign Up", for: .normal)
             
         }else{//Login
             loginType = LoginType.signIn
-            actionButton.titleLabel?.text = "Sign In"
+            actionButton.setTitle("Sign In", for: .normal)
         }
     }
     
@@ -80,7 +80,13 @@ class LoginViewController: UIViewController {
                         alertController.addAction(alertAction)
                         
                         //4.Present the aler
-                        self.present(alertController, animated: true)
+                        self.present(alertController, animated: true){
+                            
+                            //Change the buttons to sign
+                            self.loginType = LoginType.signIn
+                            self.segmentedControl.selectedSegmentIndex = 1
+                            self.actionButton.setTitle("Sign In", for: .normal)
+                        }
                     }
                     
                 }
@@ -91,8 +97,13 @@ class LoginViewController: UIViewController {
             }else{
             gigController.signIn(for: user) { (error) in
                 //Handle error
-                
-                //create alert
+                if let error = error {
+                    print("Error during sign in: \(error)")
+                }else {
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                }
             }
             
             }
