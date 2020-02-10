@@ -18,6 +18,16 @@ enum HTTPMethod: String {
     case get = "GET"
     
 }
+
+enum NetworkError: Error {
+    case noAuth
+    case badAuth
+    case otherError
+    case badData
+    case noDecode
+}
+
+
 import Foundation
 
 class GigController {
@@ -178,5 +188,16 @@ class GigController {
         }.resume()
     }
     
+    //Get all Gigs
+    func getAllGigs(completion: @escaping (Result<[Gig], NetworkError>) -> Void) {
+        
+        guard let bearer = bearer else {
+            completion(.failure(.noAuth))
+            return
+        }
+        
+        
+        
+    }
     
 }

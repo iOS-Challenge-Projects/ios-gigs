@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		049EC7DF23F1550900FBC176 /* Gig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049EC7DE23F1550900FBC176 /* Gig.swift */; };
 		04EA9BC023EB2CFE00E43AEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EA9BBF23EB2CFE00E43AEC /* AppDelegate.swift */; };
 		04EA9BC223EB2CFE00E43AEC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EA9BC123EB2CFE00E43AEC /* SceneDelegate.swift */; };
 		04EA9BC423EB2CFE00E43AEC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EA9BC323EB2CFE00E43AEC /* LoginViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		049EC7DE23F1550900FBC176 /* Gig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gig.swift; sourceTree = "<group>"; };
 		04EA9BBC23EB2CFE00E43AEC /* Gigs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gigs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04EA9BBF23EB2CFE00E43AEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04EA9BC123EB2CFE00E43AEC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			children = (
 				04EA9BD723EBEA5300E43AEC /* Bearer.swift */,
 				04EA9BDB23EBEAD600E43AEC /* User.swift */,
+				049EC7DE23F1550900FBC176 /* Gig.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 				04EA9BD823EBEA5300E43AEC /* Bearer.swift in Sources */,
 				04EA9BDE23EBEB6500E43AEC /* GigController.swift in Sources */,
 				04EA9BC423EB2CFE00E43AEC /* LoginViewController.swift in Sources */,
+				049EC7DF23F1550900FBC176 /* Gig.swift in Sources */,
 				04EA9BDC23EBEAD600E43AEC /* User.swift in Sources */,
 				04EA9BD423EBE41100E43AEC /* GigsTableViewController.swift in Sources */,
 				04EA9BC023EB2CFE00E43AEC /* AppDelegate.swift in Sources */,
