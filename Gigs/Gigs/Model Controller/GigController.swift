@@ -191,12 +191,31 @@ class GigController {
     //Get all Gigs
     func getAllGigs(completion: @escaping (Result<[Gig], NetworkError>) -> Void) {
         
+        //check if we have a token
         guard let bearer = bearer else {
             completion(.failure(.noAuth))
             return
         }
         
+        //Start building url
+        guard let baseURL = baseURL else {return}
         
+        //Append end point url
+        let allGigsUrl = baseURL.appendingPathComponent("gigs/")
+        
+        var request = URLRequest(url: allGigsUrl)
+        
+        //type of request
+        request.httpMethod = HTTPMethod.get.rawValue
+        
+        //create header which includes the token
+        //Json = "Authorization": "Bearer + Token"
+        request.setValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            
+        }
         
     }
     
