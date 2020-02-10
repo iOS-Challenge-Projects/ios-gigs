@@ -11,6 +11,6 @@ import Foundation
 
 struct Gig: Codable {
     let title: String
-    let dueDate: Date
+    let dueDate: String
     let description: String
 }

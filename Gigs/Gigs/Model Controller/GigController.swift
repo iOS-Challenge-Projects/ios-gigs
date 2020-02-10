@@ -174,6 +174,7 @@ class GigController {
             
             do{
                  self.bearer = try dataDecoder.decode(Bearer.self, from: data)
+            
             }catch{
                 print("Error while decoding json: \(error)")
                 completion(error)
@@ -210,12 +211,42 @@ class GigController {
         
         //create header which includes the token
         //Json = "Authorization": "Bearer + Token"
-        request.setValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
+        
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
+            if let response = response as? HTTPURLResponse, response.statusCode == 401{
+                print("Invalid token")
+                completion(.failure(.badAuth))
+                return
+            }
             
-        }
+            if let error = error {
+                print("Error recieving Gigs data: \(error)")
+                completion(.failure(.otherError))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(.badData))
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            
+            do {
+                let gigData = try decoder.decode([Gig].self, from: data)
+                print(gigData)
+                completion(.success(gigData))
+            }catch{
+                print("Error decoding Gigs data")
+                completion(.failure(.noDecode))
+                return
+            }
+
+            
+        }.resume()
         
     }
     

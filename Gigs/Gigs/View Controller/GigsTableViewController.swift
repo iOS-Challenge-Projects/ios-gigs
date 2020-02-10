@@ -10,6 +10,11 @@ import UIKit
 
 class GigsTableViewController: UITableViewController {
 
+    private var gigsData: [Gig] = []{
+        didSet{
+            tableView.reloadData()
+        }
+    }
     //this instance of GigController will be use for dependency injection to the rest of the views
     let gigController = GigController()
     
@@ -18,28 +23,40 @@ class GigsTableViewController: UITableViewController {
 
     }
     
+    
     override func viewDidAppear(_ animated: Bool) {
         if (gigController.bearer == nil){
             performSegue(withIdentifier: "loginSegue", sender: self)
+        }else{
+            // TODO: fetch gigs here
+            getData()
         }
-        // TODO: fetch gigs here
+        
         
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        // #warning Incomplete implementation, return the number of sections
+//        return 1
+//    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return gigsData.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "subtitleCell", for: indexPath)
+        
+        let singleGig = gigsData[indexPath.row]
+        
+        cell.textLabel?.text = singleGig.title
+        cell.detailTextLabel?.text = singleGig.description
+//        let df = DateFormatter()
+//        df.timeStyle = .short
+//        df.dateStyle = .none
         
         return cell
     }
@@ -55,6 +72,21 @@ class GigsTableViewController: UITableViewController {
             }
         }
     }
- 
-
+    
+    func getData() {
+        gigController.getAllGigs { (results) in
+  
+            do{
+                let gigs = try results.get()
+                DispatchQueue.main.async {
+                    self.gigsData = gigs
+                }
+                
+            }catch{
+                print("Error saving data to array: \(error)")
+            }
+        }
+    }
+    
+    
 }
